@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Cart - PetParadise</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    * { font-family: Poppins, sans-serif; box-sizing: border-box; }
+    body { background:#f9f9f9; color:#333; }
+    .navbar-brand { font-weight:bold; font-size:1.8rem; color:#ff914d !important; }
+    .hero-small { background:#ff914d; color:#fff; padding:50px 0; text-align:center; }
+    .section-title { font-weight:bold; margin-bottom:1rem; }
+    .card:hover { transform: translateY(-4px); transition: .25s; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+    footer { background:#212529; color:#fff; }
+    .social-icons a { color:#fff; margin:0 8px; }
+    .price { font-weight:700; }
+    .muted { color:#777; }
+    .badge-quality { background:#ff914d; color:#fff; font-weight:600; }
+    .small-muted { font-size:.9rem; color:#666; }
+    .payment-option { cursor:pointer; border:1px solid #eee; padding:12px; border-radius:8px; transition:.25s; background:#fff; }
+    .payment-option.active { border-color:#ff914d; box-shadow:0 6px 20px rgba(255,145,77,.12); transform:translateY(-4px); }
+    .strike { text-decoration: line-through; opacity:.7; }
+    .save-later { color:#ff914d; cursor:pointer; }
+    .cart-empty { text-align:center; padding:80px 0; color:#666; }
+    /* Payment sparkle animation */
+    .sparkle {
+      display:inline-block;
+      position:relative;
+      vertical-align:middle;
+    }
+    .sparkle::after{
+      content:'';
+      position:absolute;
+      right:-8px;
+      top:-6px;
+      width:8px;height:8px;border-radius:2px;
+      background:linear-gradient(90deg,#ffd27f,#ff914d);
+      box-shadow:0 0 10px rgba(255,145,77,.6);
+      animation: twinkle 1.6s infinite ease-in-out;
+      opacity:0.95;
+    }
+    @keyframes twinkle{
+      0%{transform:scale(.7);opacity:.3}
+      50%{transform:scale(1.2);opacity:1}
+      100%{transform:scale(.8);opacity:.4}
+    }
+    /* fun checkout button */
+    .btn-checkout {
+      position:relative;
+      overflow:hidden;
+      transition: transform .15s;
+    }
+    .btn-checkout:active { transform: translateY(2px); }
+    .pulse {
+      position:absolute; left:-40%; top:-40%; width:200%; height:200%;
+      background: radial-gradient(circle at center, rgba(255,145,77,.06), transparent 40%);
+      transform: rotate(15deg);
+      transition: opacity .4s;
+      opacity:0;
+      pointer-events:none;
+    }
+    .btn-checkout:hover .pulse { opacity:1; }
+  </style>
+</head>
+<body>
+
+<!-- Navbar (matches existing pages) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🐾 PetParadise</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="adopt.html">Adopt</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero-small">
+  <div class="container">
+    <h1>Your Cart <span class="small-muted"></span></h1>
+  </div>
+</section>
+
+<!-- Main -->
+<section class="container py-5">
+  <div class="row g-4">
+    <!-- Cart Items -->
+    <div class="col-lg-8">
+      <h3 class="section-title">Shopping Cart</h3>
+
+      <div id="cartList">
+        <!-- JavaScript will render cart items here -->
+      </div>
+
+      <div class="mt-4 d-flex justify-content-between align-items-center">
+        <div>
+          <button id="clearCart" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Clear Cart</button>
+          <button id="saveAll" class="btn btn-outline-secondary btn-sm ms-2"><i class="fas fa-bookmark"></i> Save For Later</button>
+        </div>
+        <div>
+          <input id="couponInput" class="form-control d-inline-block" style="width:220px" placeholder="Coupon code">
+          <button id="applyCoupon" class="btn btn-warning ms-2">Apply</button>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <h5 class="section-title">Saved For Later</h5>
+      <div id="savedList" class="row g-3">
+        <!-- saved items -->
+      </div>
+    </div>
+
+    <!-- Order Summary & Checkout -->
+    <div class="col-lg-4">
+      <div class="card p-3">
+        <h5 class="mb-3">Order Summary</h5>
+        <div class="d-flex justify-content-between small-muted"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+        <div class="d-flex justify-content-between small-muted"><span>Shipping</span><span id="shipping">₹0</span></div>
+        <div class="d-flex justify-content-between small-muted"><span>Tax (GST)</span><span id="tax">₹0</span></div>
+        <div class="d-flex justify-content-between small-muted"><span>Discount</span><span id="discount">-₹0</span></div>
+        <hr>
+        <div class="d-flex justify-content-between price"><span>Total</span><span id="grandTotal">₹0</span></div>
+
+        <div class="mt-3">
+          <h6 class="mb-2">Shipping Options</h6>
+          <select id="shippingSelect" class="form-select mb-3">
+            <option value="0">Standard - Free (3-5 days)</option>
+            <option value="99">Express - ₹99 (1-2 days)</option>
+            <option value="199">Same Day - ₹199 (where available)</option>
+          </select>
+
+          <h6 class="mb-2">Choose Payment Method</h6>
+          <div class="row g-2" id="paymentMethods">
+            <div class="col-12">
+              <div class="payment-option d-flex align-items-center" data-method="card">
+                <i class="fa-regular fa-credit-card fa-2x me-3"></i>
+                <div><strong>Card</strong><div class="small-muted">Visa / MasterCard / Amex</div></div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="payment-option d-flex align-items-center" data-method="upi">
+                <i class="fa-solid fa-qrcode fa-2x me-3"></i>
+                <div><strong>UPI</strong><div class="small-muted">Google Pay, PhonePe, Paytm</div></div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="payment-option d-flex align-items-center" data-method="wallet">
+                <i class="fa-solid fa-wallet fa-2x me-3"></i>
+                <div><strong>Wallets / BNPL</strong><div class="small-muted">Razorpay / Paytm / BNPL</div></div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="payment-option d-flex align-items-center" data-method="netbanking">
+                <i class="fa-solid fa-university fa-2x me-3"></i>
+                <div><strong>Netbanking</strong><div class="small-muted">All major banks</div></div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="payment-option d-flex align-items-center" data-method="paypal">
+                <i class="fa-brands fa-paypal fa-2x me-3"></i>
+                <div><strong>PayPal</strong><div class="small-muted">PayPal checkout</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 d-grid">
+            <button id="checkoutBtn" class="btn btn-warning btn-lg btn-checkout">
+              <span class="pulse"></span>
+              <span class="sparkle"></span>
+              <i class="fas fa-rocket me-2"></i> Proceed to Checkout
+            </button>
+          </div>
+
+          <div class="mt-3 small-muted">
+            <p class="mb-1"><strong>Refunds & Returns:</strong> <a href="#" id="refundPolicyToggle">View policy</a></p>
+            <p class="mb-0">Secure checkout • 256-bit SSL</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Refund modal content (hidden) -->
+      <div id="refundPolicy" class="mt-3 card p-3 d-none">
+        <h6>Refund & Return Policy</h6>
+        <p class="small-muted">30-day returns. Refunds processed to original payment method. Partial refunds possible for damaged or missing items. For more, click <a href="#">Terms & Conditions</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer (matches other pages) -->
+<footer class="py-4 text-center">
+  <div class="container">
+    <p>© 2025 PetParadise. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Checkout Modal -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Checkout - Enter details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="checkoutForm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Full name</label>
+              <input required class="form-control" id="shipName" placeholder="Name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Phone</label>
+              <input required class="form-control" id="shipPhone" placeholder="+91">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Address</label>
+              <input required class="form-control" id="shipAddr" placeholder="House, street, area">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">City</label>
+              <input required class="form-control" id="shipCity">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">State</label>
+              <input required class="form-control" id="shipState">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">PIN</label>
+              <input required class="form-control" id="shipPin">
+            </div>
+
+            <div class="col-12">
+              <h6>Order Notes (optional)</h6>
+              <textarea id="orderNotes" class="form-control" rows="2" placeholder="Delivery instructions"></textarea>
+            </div>
+          </div>
+        </form>
+
+        <hr>
+        <h6>Payment Preview</h6>
+        <div id="paymentPreview" class="small-muted"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirmPayment" class="btn btn-success">Confirm & Pay</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content text-center p-3">
+      <div class="modal-body">
+        <i class="fas fa-check-circle fa-3x text-success"></i>
+        <h5 class="mt-3">Payment Successful!</h5>
+        <p id="orderInfo">Order #<span id="orderId"></span> confirmed. 🎉</p>
+        <a id="downloadInvoice" href="#" class="btn btn-outline-primary btn-sm">Download Invoice</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* === Robust cart handling + fun payment UI === */
+
+/* Example fallback products if cart is empty during dev */
+const sampleProducts = [
+  { id:'finches', title:'Finches', price:2000, img:'images/pexels-muhammad-nadeem-2148014195-32968455.jpg', qty:1, quality:'Standard', unitPrice:2000, total:2000 }
+];
+
+/* Utilities */
+const rupee = (n) => '₹' + Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+
+/* Load saved data */
+let cart = JSON.parse(localStorage.getItem('pet_cart') || 'null');
+let saved = JSON.parse(localStorage.getItem('pet_saved') || '[]');
+let coupon = JSON.parse(localStorage.getItem('pet_coupon') || 'null');
+if(!cart) { cart = sampleProducts.slice(); persistCart(); }
+
+/* Elements */
+const elements = {
+  cartList: document.getElementById('cartList'),
+  savedList: document.getElementById('savedList'),
+  subtotal: document.getElementById('subtotal'),
+  shipping: document.getElementById('shipping'),
+  tax: document.getElementById('tax'),
+  discount: document.getElementById('discount'),
+  grandTotal: document.getElementById('grandTotal'),
+  shippingSelect: document.getElementById('shippingSelect'),
+  paymentMethods: document.getElementById('paymentMethods'),
+  checkoutBtn: document.getElementById('checkoutBtn'),
+  couponInput: document.getElementById('couponInput'),
+  applyCoupon: document.getElementById('applyCoupon'),
+  refundPolicyToggle: document.getElementById('refundPolicyToggle'),
+  refundPolicy: document.getElementById('refundPolicy'),
+  clearCart: document.getElementById('clearCart'),
+  saveAll: document.getElementById('saveAll')
+};
+
+/* Normalize loaded cart items - ensure numeric unitPrice & total exist */
+function normalizeItem(item) {
+  // Prioritize explicit numeric fields if present
+  let unitPrice = (typeof item.unitPrice !== 'undefined') ? Number(item.unitPrice) : (typeof item.price !== 'undefined' ? Number(item.price) : null);
+  if(unitPrice == null || isNaN(unitPrice)) {
+    // Try to derive from total and qty if possible
+    if(item.total && item.qty) unitPrice = Number(item.total) / Number(item.qty);
+    else unitPrice = 0;
+  }
+  const qty = Math.max(1, parseInt(item.qty || 1) || 1);
+  const total = Math.round(unitPrice * qty);
+  return Object.assign({}, item, { unitPrice: Number(unitPrice), qty, total });
+}
+
+/* Ensure cart items normalized */
+cart = cart.map(normalizeItem);
+persistCart();
+
+/* Save helpers */
+function persistCart(){ localStorage.setItem('pet_cart', JSON.stringify(cart)); }
+function persistSaved(){ localStorage.setItem('pet_saved', JSON.stringify(saved)); }
+
+/* Price calculation per item (shows line total) */
+function itemLineTotal(p) {
+  // If quality label affects price, try to detect changes
+  let multiplier = 1;
+  const q = (p.quality || '').toLowerCase();
+  if(q.indexOf('premium') !== -1) multiplier = 1.2;
+  if(q.indexOf('deluxe') !== -1) multiplier = 1.4;
+  const up = Number(p.unitPrice || 0);
+  return Math.round(up * multiplier * Number(p.qty || 1));
+}
+
+/* Render cart items */
+function renderCart() {
+  elements.cartList.innerHTML = '';
+  if(cart.length === 0) {
+    elements.cartList.innerHTML = `<div class="cart-empty card"><h5>Your cart is empty</h5><p class="small-muted">Try browsing the shop to add items.</p><a href="shop.html" class="btn btn-outline-primary">Go to Shop</a></div>`;
+    renderSaved();
+    updateSummary();
+    return;
+  }
+
+  cart.forEach((p, idx) => {
+    // ensure normalized
+    p = normalizeItem(p);
+    cart[idx] = p;
+
+    const item = document.createElement('div');
+    item.className = 'card mb-3 p-3';
+    item.innerHTML = `
+      <div class="row g-3 align-items-center">
+        <div class="col-3 col-md-2">
+          <img src="${p.img}" class="img-fluid" style="border-radius:8px; min-height:64px; max-height:96px; object-fit:cover;" alt="${p.title}">
+        </div>
+        <div class="col-5 col-md-6">
+          <h6 class="mb-1">${p.title} <span class="badge badge-quality ms-1">${p.quality || 'Standard'}</span></h6>
+          <div class="small-muted">Product code: ${p.id}</div>
+          <div class="mt-2">
+            <label class="form-label small-muted me-2">Quality:</label>
+            <select class="form-select form-select-sm d-inline-block quality-select" style="width:160px" data-index="${idx}">
+              <option ${p.quality && p.quality.toLowerCase()==='standard' ? 'selected' : ''}>Standard</option>
+              <option ${p.quality && p.quality.toLowerCase().includes('premium') ? 'selected' : ''}>Premium (+20%)</option>
+              <option ${p.quality && p.quality.toLowerCase().includes('deluxe') ? 'selected' : ''}>Deluxe (+40%)</option>
+            </select>
+            <div class="small-muted mt-1">Unit: ${rupee(p.unitPrice)}</div>
+          </div>
+        </div>
+        <div class="col-4 col-md-4 text-end">
+          <div class="mb-2 price">${rupee(itemLineTotal(p))}</div>
+          <div class="d-flex justify-content-end align-items-center">
+            <button class="btn btn-sm btn-outline-secondary qty-decrease me-1" data-index="${idx}"><i class="fas fa-minus"></i></button>
+            <input class="form-control form-control-sm text-center qty-input" style="width:60px" value="${p.qty}" data-index="${idx}">
+            <button class="btn btn-sm btn-outline-secondary qty-increase ms-1" data-index="${idx}"><i class="fas fa-plus"></i></button>
+          </div>
+          <div class="mt-2 small-muted">
+            <a class="text-danger remove-item" data-index="${idx}" style="cursor:pointer">Remove</a>
+            <span class="mx-2">|</span>
+            <a class="save-later" data-index="${idx}">Save for later</a>
+          </div>
+        </div>
+      </div>
+    `;
+    elements.cartList.appendChild(item);
+  });
+
+  // attach listeners after DOM created
+  document.querySelectorAll('.qty-increase').forEach(b => b.addEventListener('click', (e)=> {
+    const i = +e.currentTarget.dataset.index; cart[i].qty = Number(cart[i].qty || 1) + 1; cart[i] = normalizeItem(cart[i]); persistCart(); renderCart();
+  }));
+  document.querySelectorAll('.qty-decrease').forEach(b => b.addEventListener('click', (e)=> {
+    const i = +e.currentTarget.dataset.index; if(cart[i].qty>1) cart[i].qty = Number(cart[i].qty) - 1; cart[i] = normalizeItem(cart[i]); persistCart(); renderCart();
+  }));
+  document.querySelectorAll('.qty-input').forEach(inp => {
+    inp.addEventListener('change', (e)=> {
+      const i = +e.target.dataset.index;
+      let v = parseInt(e.target.value) || 1; v = Math.max(1, v);
+      cart[i].qty = v; cart[i] = normalizeItem(cart[i]); persistCart(); renderCart();
+    });
+  });
+  document.querySelectorAll('.remove-item').forEach(a => a.addEventListener('click', (e)=> {
+    const i = +e.currentTarget.dataset.index; cart.splice(i,1); persistCart(); renderCart();
+  }));
+  document.querySelectorAll('.save-later').forEach(a => a.addEventListener('click', (e)=> {
+    const i = +e.currentTarget.dataset.index; saved.push(cart[i]); cart.splice(i,1); persistSaved(); persistCart(); renderCart();
+  }));
+  document.querySelectorAll('.quality-select').forEach(sel => sel.addEventListener('change', (e)=> {
+    const i = +e.target.dataset.index;
+    cart[i].quality = e.target.value;
+    cart[i] = normalizeItem(cart[i]);
+    persistCart(); renderCart();
+  }));
+
+  renderSaved();
+  updateSummary();
+}
+
+/* Render saved for later area */
+function renderSaved() {
+  elements.savedList.innerHTML = '';
+  if(saved.length === 0) {
+    elements.savedList.innerHTML = `<div class="small-muted">No items saved for later.</div>`; return;
+  }
+  saved.forEach((p, idx) => {
+    const col = document.createElement('div'); col.className = 'col-12';
+    col.innerHTML = `
+      <div class="card p-2 d-flex align-items-center">
+        <div class="d-flex justify-content-between w-100">
+          <div class="d-flex align-items-center">
+            <img src="${p.img}" style="width:64px;height:64px;object-fit:cover;border-radius:6px" class="me-3">
+            <div>
+              <strong>${p.title}</strong><div class="small-muted">Saved item • ${p.quality||'Standard'}</div>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-sm btn-outline-primary move-back" data-index="${idx}">Move to Cart</button>
+            <button class="btn btn-sm btn-outline-danger ms-2 remove-saved" data-index="${idx}">Remove</button>
+          </div>
+        </div>
+      </div>
+    `;
+    elements.savedList.appendChild(col);
+  });
+  document.querySelectorAll('.move-back').forEach(b => b.addEventListener('click', (e)=> {
+    const i = +e.currentTarget.dataset.index; cart.push(saved[i]); saved.splice(i,1); persistSaved(); persistCart(); renderCart();
+  }));
+  document.querySelectorAll('.remove-saved').forEach(b => b.addEventListener('click', (e)=> {
+    const i = +e.currentTarget.dataset.index; saved.splice(i,1); persistSaved(); renderCart();
+  }));
+}
+
+/* Summary calculation - robust: prefer stored numeric .total, fallback to unitPrice*qty */
+function updateSummary() {
+  const subtotalVal = cart.reduce((s,p) => {
+    const total = (typeof p.total !== 'undefined' && !isNaN(Number(p.total))) ? Number(p.total) : itemLineTotal(p);
+    return s + Number(total || 0);
+  }, 0);
+  const shipVal = Number(elements.shippingSelect.value || 0);
+  const gst = Math.round(subtotalVal * 0.18);
+  const discountVal = coupon && coupon.type === 'percent' ? Math.round(subtotalVal * (coupon.value/100)) : (coupon && coupon.type === 'flat' ? Number(coupon.value) : 0);
+  const total = Math.max(0, subtotalVal + shipVal + gst - discountVal);
+
+  elements.subtotal.textContent = rupee(subtotalVal);
+  elements.shipping.textContent = rupee(shipVal);
+  elements.tax.textContent = rupee(gst);
+  elements.discount.textContent = '-'+rupee(discountVal);
+  elements.grandTotal.textContent = rupee(total);
+
+  // Persist summary for checkout preview
+  localStorage.setItem('pet_summary', JSON.stringify({subtotal: subtotalVal, shipping: shipVal, tax: gst, discount: discountVal, total}));
+}
+
+/* Coupon (demo) */
+elements.applyCoupon.addEventListener('click', ()=> {
+  const code = elements.couponInput.value.trim().toUpperCase();
+  if(!code) return alert('Enter coupon code');
+  const coupons = {
+    'PET10': { type:'percent', value:10, desc:'10% off' },
+    'WELCOME200': { type:'flat', value:200, desc:'₹200 off' }
+  };
+  if(coupons[code]) {
+    coupon = { code, ...coupons[code] };
+    localStorage.setItem('pet_coupon', JSON.stringify(coupon));
+    showToast('Coupon applied: ' + coupon.desc);
+  } else {
+    coupon = null; localStorage.removeItem('pet_coupon'); showToast('Invalid coupon');
+  }
+  updateSummary();
+});
+
+/* Shipping change */
+elements.shippingSelect.addEventListener('change', updateSummary);
+
+/* Refund toggle */
+elements.refundPolicyToggle.addEventListener('click', (e)=> {
+  e.preventDefault();
+  elements.refundPolicy.classList.toggle('d-none');
+});
+
+/* Clear cart & save all */
+elements.clearCart.addEventListener('click', ()=> {
+  if(confirm('Clear all items from cart?')) { cart = []; persistCart(); renderCart(); }
+});
+elements.saveAll.addEventListener('click', ()=> {
+  if(cart.length === 0) return alert('Cart is empty');
+  saved = saved.concat(cart); cart = []; persistSaved(); persistCart(); renderCart();
+});
+
+/* Payment method UI + fun text */
+let selectedMethod = 'card';
+document.querySelectorAll('.payment-option').forEach(el => {
+  el.addEventListener('click', ()=> {
+    document.querySelectorAll('.payment-option').forEach(x => x.classList.remove('active'));
+    el.classList.add('active');
+    selectedMethod = el.dataset.method;
+  });
+});
+document.querySelectorAll('.payment-option')[0].classList.add('active');
+
+/* Checkout flow */
+const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+
+elements.checkoutBtn.addEventListener('click', ()=> {
+  if(cart.length === 0) { alert('Your cart is empty'); return; }
+  const summary = JSON.parse(localStorage.getItem('pet_summary') || '{}');
+  // Fun preview messages per method
+  let methodText = '';
+  switch(selectedMethod){
+    case 'card': methodText = 'Fast & secure — swipe that plastic!'; break;
+    case 'upi': methodText = 'Zap it with UPI — quick and friendly.'; break;
+    case 'wallet': methodText = 'Use a wallet — instant checkout vibes.'; break;
+    case 'netbanking': methodText = 'Bank-powered — trusted & safe.'; break;
+    case 'paypal': methodText = 'PayPal — global & secure.'; break;
+    default: methodText = 'Ready to pay.'; break;
+  }
+  const preview = `
+    <div>Payment method: <strong>${selectedMethod.toUpperCase()}</strong> — ${methodText}</div>
+    <div>Items: <strong>${cart.length}</strong></div>
+    <div>Total payable: <strong>${rupee(summary.total || 0)}</strong></div>
+    <div class="mt-2"><small class="small-muted">Tip: Use "PET10" for 10% off (demo)</small></div>
+  `;
+  document.getElementById('paymentPreview').innerHTML = preview;
+  checkoutModal.show();
+});
+
+/* Confirm & Pay (simulated with playful feedback + basic validation) */
+document.getElementById('confirmPayment').addEventListener('click', (e)=> {
+  e.preventDefault();
+  const name = document.getElementById('shipName').value.trim();
+  const phone = document.getElementById('shipPhone').value.trim();
+  const addr = document.getElementById('shipAddr').value.trim();
+  if(!name || !phone || !addr) { alert('Please fill shipping details'); return; }
+
+  const btn = document.getElementById('confirmPayment');
+  btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+  setTimeout(()=> {
+    const orderId = 'PP' + Date.now().toString().slice(-7);
+    document.getElementById('orderId').textContent = orderId;
+
+    const summary = JSON.parse(localStorage.getItem('pet_summary') || '{}');
+    const order = { orderId, cart, summary, shippingInfo: {
+      name, phone, addr,
+      city: document.getElementById('shipCity').value,
+      state: document.getElementById('shipState').value,
+      pin: document.getElementById('shipPin').value
+    }, method: selectedMethod, date: new Date().toISOString() };
+    const orders = JSON.parse(localStorage.getItem('pet_orders') || '[]');
+    orders.push(order); localStorage.setItem('pet_orders', JSON.stringify(orders));
+
+    // Clear cart
+    cart = []; persistCart(); renderCart();
+
+    checkoutModal.hide();
+    successModal.show();
+    btn.disabled = false; btn.innerHTML = 'Confirm & Pay';
+    showToast('Payment successful — thanks for adopting a friend! 🎉');
+  }, 1200);
+});
+
+/* Invoice download */
+document.getElementById('downloadInvoice').addEventListener('click', (e)=> {
+  e.preventDefault();
+  const orders = JSON.parse(localStorage.getItem('pet_orders') || '[]');
+  const last = orders[orders.length-1];
+  if(!last) return alert('No recent order');
+  const invoice = `PetParadise Invoice\nOrder: ${last.orderId}\nDate: ${new Date(last.date).toLocaleString()}\nTotal: ${rupee(last.summary.total)}\n\nThank you for shopping!\n`;
+  const blob = new Blob([invoice], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'invoice-'+last.orderId+'.txt'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* small toast helper (simple) */
+function showToast(msg) {
+  // simple floating message
+  const t = document.createElement('div');
+  t.style.position = 'fixed'; t.style.right = '20px'; t.style.bottom = '20px';
+  t.style.background = '#333'; t.style.color = '#fff'; t.style.padding = '10px 14px';
+  t.style.borderRadius = '8px'; t.style.boxShadow = '0 8px 20px rgba(0,0,0,.2)';
+  t.style.zIndex = 11000; t.style.opacity = 0; t.style.transition = 'opacity .2s';
+  t.innerText = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(()=> t.style.opacity = 1);
+  setTimeout(()=> { t.style.opacity = 0; setTimeout(()=> t.remove(), 400); }, 2200);
+}
+
+/* init */
+renderCart();
+updateSummary();
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Adopt Form - Pet Paradise</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {font-family:Poppins,sans-serif; background:#f9f9f9; color:#333;}
+    .container {max-width:600px; margin-top:50px; padding:30px; background:white; border-radius:15px; box-shadow:0 5px 25px rgba(0,0,0,.15);}
+    h2 {color:#ff5722; font-weight:bold; margin-bottom:20px; text-align:center;}
+    .animal-img {display:block; margin:0 auto 20px; max-width:100%; border-radius:15px;}
+    .form-control {margin-bottom:15px;}
+    .btn-adopt {background:#ff914d; color:white; border:none; width:100%; padding:10px; font-weight:bold; transition:.3s; box-shadow:0 0 12px rgba(255,145,77,0.6);}
+    .btn-adopt:hover {background:#ff5722; box-shadow:0 0 20px rgba(255,87,34,0.8);}
+    .success-message {display:none; background:#e8f5e9; color:#2e7d32; padding:20px; border-radius:10px; text-align:center; margin-top:20px; font-weight:bold; font-size:1.2rem;}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 id="animalTitle">Adopt Your Friend</h2>
+  <img id="animalImg" src="" alt="Animal" class="animal-img">
+
+  <form id="adoptForm">
+    <input type="hidden" name="animalName" id="animalNameInput">
+    
+    <input type="text" name="fullName" class="form-control" placeholder="Full Name" required>
+    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+    <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
+    <textarea name="address" class="form-control" placeholder="Your Address" rows="3" required></textarea>
+    
+    <button type="submit" class="btn btn-adopt">Adopt Now</button>
+  </form>
+
+  <div class="success-message" id="successMessage">
+    🎉 Success! You are now adopting <span id="adoptedAnimal"></span>! Thank you for giving them a loving home. 🐾
+  </div>
+</div>
+
+<script>
+  // Get animal name from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const animalName = urlParams.get('animal');
+
+  // Map animal names to images
+  const images = {
+    "Golden Retriever": "images/IMG-20250807-WA0034.jpg",
+    "Labrador Retriever": "images/IMG-20250807-WA0029.jpg",
+    "German Shepherd": "images/pexels-pixabay-236622.jpg",
+    "Pug": "images/IMG-20250807-WA0033.jpg",
+    "Shih Tzu": "images/IMG-20250807-WA0031.jpg",
+    "Persian Cat": "images/stefan-ivanov-cheXIALO9j0-unsplash.jpg",
+    "Bengal Cat": "images/pexels-nika-benedictova-24565203-9118280.jpg",
+    "Siamese Cat": "images/pexels-pixabay-357141.jpg",
+    "Sphynx Cat": "images/pexels-shvetsa-4587970.jpg",
+    "Green Parrot": "images/pexels-helenalopes-1774927.jpg",
+    "Budgerigar": "images/IMG-20250807-WA0014.jpg",
+    "Canary": "images/IMG-20250807-WA0015.jpg",
+    "Cockatiel": "images/IMG-20250807-WA0016.jpg",
+    "Love Birds": "images/IMG-20250807-WA0017.jpg",
+    "Horse": "images/helena-lopes-lIeqGEdvex0-unsplash.jpg",
+    "Duck": "images/guy-bianco-iv-K8lVYS_u0UE-unsplash.jpg",
+    "Lily": "images/jelle-taman-60WkGpWyadY-unsplash.jpg",
+    "Turtle": "images/zdenek-machacek-IgIdrCy0VxI-unsplash.jpg",
+    "Pig": "images/christopher-carson-i4XLJmlYit4-unsplash.jpg",
+    "Cock": "images/ashes-sitoula-KdZvvyemkPM-unsplash.jpg",
+    "Dachshund Dog": "images/360_F_755276205_T74uLkyAD3X0JklaXluVdlxAfkhPbVqS.jpg",
+    "Lab Puppies": "images/pexels-chevanon-1108099.jpg",
+    "Pit Bull": "images/pexels-mao-li-168781267-11243683.jpg",
+    "Rat Terrier": "images/istockphoto-501597845-2048x2048.jpg",
+    "Hedgehog": "images/rainer-bleek-cCDkGZOobRY-unsplash.jpg",
+    "Pigeon": "images/pexels-mali-75973.jpg",
+    "Finches": "images/pexels-muhammad-nadeem-2148014195-32968455.jpg"
+  };
+
+  if(animalName && images[animalName]){
+    document.getElementById('animalTitle').innerText = animalName;
+    document.getElementById('animalImg').src = images[animalName];
+    document.getElementById('animalNameInput').value = animalName;
+  }
+
+  // Form submit handler
+  document.getElementById('adoptForm').addEventListener('submit', function(e){
+    e.preventDefault(); // prevent page reload
+
+    const adoptedAnimal = document.getElementById('animalNameInput').value;
+    document.getElementById('adoptedAnimal').innerText = adoptedAnimal;
+
+    // Hide form and show success message
+    this.style.display = 'none';
+    document.getElementById('successMessage').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

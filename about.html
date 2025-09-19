@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Online Pet Shop</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Dancing+Script&display=swap" rel="stylesheet"/>
+
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.8rem;
+      color: #ff914d !important;
+    }
+
+    /* Hero Section with static image */
+    .hero-about {
+      background: url('images/front-view-beautiful-dog-with-copy-space.jpg') no-repeat center center/cover;
+      height: 60vh;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .hero-about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+
+    .hero-about .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      transition: 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Team images circular & hover animation */
+    .team-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    h5.team-name {
+      font-family: 'Dancing Script', cursive;
+    }
+
+    footer {
+      background-color: #212529;
+      color: #ffffff;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 20px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ff914d;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🐾 PetParadise</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="adopt.html">Adopt</a></li>
+        <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-about">
+  <div class="container">
+    <h1 class="display-4">About PetShop</h1>
+    <p class="lead">We care for your pets like family.</p>
+  </div>
+</section>
+
+<!-- About Content -->
+<section class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="c:\Users\anilm\OneDrive\Desktop\project\images\horizontal-shot-curly-joyous-woman-holds-tightly-two-pedigree-puppies-with-white-fur-enjoys-present-from-boyfriend_273609-34453.avif" class="img-fluid rounded" alt="Our Pets" loading="lazy">
+    </div>
+    <div class="col-md-6">
+      <h2 class="section-title">Our Mission</h2>
+      <p>
+        At PetShop, we aim to provide top-quality care and products for your furry companions. We are committed to ensuring that every pet receives love, attention, and the best supplies available. 
+        Our mission is not only to sell products but also to educate and guide pet owners on proper care, nutrition, and wellbeing. We partner with veterinarians and pet experts to provide reliable advice and foster a loving environment for pets everywhere.
+      </p>
+      <h2 class="section-title mt-4">Our Vision</h2>
+      <p>
+        We envision a pet-loving community where every animal is healthy, happy, and nurtured. Our goal is to create safe spaces for pets, promote adoption and responsible pet ownership, and offer services that improve pets’ quality of life.
+        We aspire to build long-term relationships with our customers, helping them strengthen the bond with their pets. Through innovation, sustainability, and compassion, we want to become a trusted name in pet care.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="bg-light py-5">
+  <div class="container text-center">
+    <h2 class="section-title">Why Choose Us</h2>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="card h-100 text-center p-3">
+          <i class="fas fa-truck fa-2x text-warning mb-3"></i>
+          <h5>Free Delivery</h5>
+          <p>Fast & free home delivery across multiple cities.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 text-center p-3">
+          <i class="fas fa-user-md fa-2x text-warning mb-3"></i>
+          <h5>24x7 Vet Support</h5>
+          <p>Emergency vet assistance, always on your side.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 text-center p-3">
+          <i class="fas fa-cut fa-2x text-warning mb-3"></i>
+          <h5>Pet Grooming</h5>
+          <p>Professional grooming to keep pets clean and healthy.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 text-center p-3">
+          <i class="fas fa-graduation-cap fa-2x text-warning mb-3"></i>
+          <h5>Training Services</h5>
+          <p>Behavioral training to keep your pet well-mannered.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Meet the Team -->
+<section class="container py-5">
+  <h2 class="text-center section-title" style="font-family: 'Dancing Script', cursive;">Meet Our Team</h2>
+  <div class="row g-4 text-center">
+    <div class="col-md-4">
+      <a href="https://www.instagram.com/hackerceo" target="_blank">
+        <img src="c:/Users/anilm/OneDrive/Desktop/project/images/WhatsApp Image 2025-08-10 at 17.18.57_73cb9ae1.jpg" class="team-img" alt="Pranav Madage - Founder & CEO" loading="lazy">
+      </a>
+      <h5 class="mt-3 team-name">Pranav Madage</h5>
+      <p>Founder & CEO</p>
+    </div>
+    <div class="col-md-4">
+      <a href="https://www.instagram.com/kranti_kshirsagar29" target="_blank">
+        <img src="c:/Users/anilm/OneDrive/Desktop/project/images/WhatsApp Image 2025-08-10 at 17.35.59_f8c5eb03.jpg" class="team-img" alt="Kranti Kshirsagar - Veterinary Lead" loading="lazy">
+      </a>
+      <h5 class="mt-3 team-name">Kranti Kshirsagar</h5>
+      <p>Veterinary Lead</p>
+    </div>
+    <div class="col-md-4">
+      <a href="https://www.instagram.com/shree_2251_" target="_blank">
+        <img src="c:/Users/anilm/OneDrive/Desktop/project/images/shree_2251__14040520_174527310.jpg" class="team-img" alt="Shrikant Deshmukh - Grooming Expert" loading="lazy">
+      </a>
+      <h5 class="mt-3 team-name">Shrikant Deshmukh</h5>
+      <p>Grooming Expert</p>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="bg-warning text-center text-white py-5">
+  <div class="container">
+    <h2 class="mb-3">Want to join the PetShop Family?</h2>
+    <a href="contact.html" class="btn btn-light btn-lg">Contact Us</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center py-4">
+  <div class="container">
+    <p class="mb-2">© 2025 PetShop. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

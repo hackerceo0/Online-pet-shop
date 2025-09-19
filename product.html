@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Product - Pet Paradise</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {font-family:Poppins,sans-serif;box-sizing:border-box;}
+    body {background:#f9f9f9;color:#333;}
+    .navbar-brand{font-weight:bold;font-size:1.8rem;color:#ff914d!important;}
+    .hero-small{background:#ff914d;color:white;padding:60px 0;text-align:center;}
+    .product-img{width:100%;max-height:450px;object-fit:cover;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,.2);}
+    .price{font-size:1.8rem;font-weight:700;color:#ff914d;}
+    .old-price{text-decoration:line-through;color:#888;margin-left:10px;font-weight:500;}
+    .feature-list li{margin-bottom:8px;}
+    .btn-custom{background:#ff914d;color:white;border:none;}
+    .btn-custom:hover{background:#e67e22;color:white;}
+    footer{background:#212529;color:white;}
+    .social-icons a{color:white;margin:0 8px;font-size:1.2rem;}
+    .social-icons a:hover{color:#ff914d;}
+    .meta-small {color:#666; font-size:.95rem; margin-bottom:.5rem;}
+    .total-line {font-weight:700; font-size:1.1rem; margin-top:10px;}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🐾 PetParadise</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="adopt.html">Adopt</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero-small">
+  <div class="container">
+    <h1 id="productName">Product Details</h1>
+  </div>
+</section>
+
+<!-- Product Info -->
+<section class="container py-5">
+  <div class="row g-4">
+    <!-- Image -->
+    <div class="col-md-6">
+      <img id="productImage" src="" alt="Product" class="product-img">
+    </div>
+
+    <!-- Info -->
+    <div class="col-md-6">
+      <h2 id="productTitle"></h2>
+      <p class="meta-small" id="productMeta">Premium pet • Ready to join your family</p>
+
+      <p class="price"><span id="productPrice"></span> <span class="old-price" id="productOldPrice"></span></p>
+      <p id="productDesc"></p>
+
+      <h5>Features:</h5>
+      <ul id="productFeatures" class="feature-list"></ul>
+
+      <div class="mb-3">
+        <label class="form-label">Quality</label>
+        <select class="form-select" id="quality">
+          <option value="standard">Standard</option>
+          <option value="premium">Premium (+20%)</option>
+          <option value="deluxe">Deluxe (+40%)</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" id="quantity" class="form-control" min="1" value="1" style="width:120px">
+      </div>
+
+      <div class="total-line">Total: <span id="totalPrice">—</span></div>
+
+      <div class="mt-3">
+        <button id="addToCart" class="btn btn-custom btn-lg"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 text-center">
+  <div class="container">
+    <p>© 2025 PetParadise. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* === PRODUCTS DATA === */
+const products = {
+  "dog-gr": {title:"Golden Retriever", price:15000, oldPrice:18000, img:"images/IMG-20250807-WA0034.jpg", desc:"Friendly and loyal Golden Retriever, perfect family pet.", features:["Vaccinated","Loyal Companion","Trained"]},
+  "dog-lr": {title:"Labrador Retriever", price:10000, oldPrice:12000, img:"images/IMG-20250807-WA0029.jpg", desc:"Smart and obedient Labrador, great for families.", features:["Playful","Good with Kids","Obedient"]},
+  "dog-gs": {title:"German Shepherd", price:15000, oldPrice:18000, img:"images/pexels-pixabay-236622.jpg", desc:"Protective German Shepherd, strong and intelligent.", features:["Guard Dog","Intelligent","Active"]},
+  "dog-pug": {title:"Pug", price:15000, oldPrice:17000, img:"images/IMG-20250807-WA0033.jpg", desc:"Cute little pug with playful nature.", features:["Cute","Playful","Loyal"]},
+  "dog-stz": {title:"Shih Tzu", price:15000, oldPrice:17000, img:"images/IMG-20250807-WA0031.jpg", desc:"Fluffy Shih Tzu, calm and friendly.", features:["Fluffy","Friendly","Gentle"]},
+
+  "cat-pc1": {title:"Persian Cat", price:8000, oldPrice:9000, img:"images/stefan-ivanov-cheXIALO9j0-unsplash.jpg", desc:"Persian cat with beautiful fur.", features:["Soft Fur","Affectionate","Healthy"]},
+  "cat-pc2": {title:"Bengal Cat", price:8000, oldPrice:9000, img:"images/pexels-nika-benedictova-24565203-9118280.jpg", desc:"Adorable Bengal cat, healthy and playful.", features:["Playful","Agile","Beautiful Coat"]},
+  "cat-pc3": {title:"Siamese Cat", price:8000, oldPrice:9000, img:"images/pexels-pixabay-357141.jpg", desc:"Siamese cat, well-groomed and elegant.", features:["Elegant","Social","Active"]},
+  "cat-pc4": {title:"Sphynx Cat", price:8000, oldPrice:9000, img:"images/pexels-shvetsa-4587970.jpg", desc:"Sphynx cat, charming and soft.", features:["Hypoallergenic","Curious","Friendly"]},
+
+  "bird-parrot": {title:"Green Parrot", price:2000, oldPrice:2500, img:"images/pexels-helenalopes-1774927.jpg", desc:"Chirpy green parrot, loves talking.", features:["Talkative","Colorful","Active"]},
+  "bird-budgerigar": {title:"Budgerigar", price:2000, oldPrice:2500, img:"images/IMG-20250807-WA0014.jpg", desc:"Colorful budgie, easy to care for.", features:["Friendly","Small","Playful"]},
+  "bird-canary": {title:"Canary", price:2000, oldPrice:2500, img:"images/IMG-20250807-WA0015.jpg", desc:"Melodious singing canary.", features:["Sings","Bright Colors","Small"]},
+  "bird-cockatiel": {title:"Cockatiel", price:2000, oldPrice:2500, img:"images/IMG-20250807-WA0016.jpg", desc:"Friendly cockatiel, whistles well.", features:["Friendly","Whistles","Social"]},
+  "bird-love": {title:"Love Birds", price:2000, oldPrice:2500, img:"images/IMG-20250807-WA0017.jpg", desc:"Pair of lovebirds, inseparable companions.", features:["Pair","Colorful","Loving"]},
+
+  "horse": {title:"Horse", price:150000, oldPrice:180000, img:"images/helena-lopes-lIeqGEdvex0-unsplash.jpg", desc:"Strong and elegant horse, perfect for riding.", features:["Strong","Elegant","Trained"]},
+  "duck": {title:"Duck", price:15000, oldPrice:17000, img:"images/guy-bianco-iv-K8lVYS_u0UE-unsplash.jpg", desc:"Friendly domestic duck, fun companion.", features:["Quacks","Friendly","Playful"]},
+  "lily": {title:"Lily", price:15000, oldPrice:17000, img:"images/jelle-taman-60WkGpWyadY-unsplash.jpg", desc:"Beautiful exotic pet named Lily.", features:["Rare","Cute","Gentle"]},
+  "turtle": {title:"Turtle", price:15000, oldPrice:17000, img:"images/zdenek-machacek-IgIdrCy0VxI-unsplash.jpg", desc:"Small turtle, calm and serene.", features:["Calm","Hard Shell","Long-living"]},
+  "pig": {title:"Pig", price:8000, oldPrice:10000, img:"images/christopher-carson-i4XLJmlYit4-unsplash.jpg", desc:"Smart and playful pig, friendly.", features:["Playful","Smart","Friendly"]},
+  "cock": {title:"Cock", price:8000, oldPrice:10000, img:"images/ashes-sitoula-KdZvvyemkPM-unsplash.jpg", desc:"Domestic cock, healthy and active.", features:["Vibrant","Loud","Active"]},
+  "dachshund": {title:"Dachshund Dog", price:8000, oldPrice:10000, img:"images/360_F_755276205_T74uLkyAD3X0JklaXluVdlxAfkhPbVqS.jpg", desc:"Cute Dachshund, loyal and playful.", features:["Playful","Loyal","Small"]},
+  "lab-puppies": {title:"Lab Puppies", price:8000, oldPrice:10000, img:"images/pexels-chevanon-1108099.jpg", desc:"Adorable Labrador puppies.", features:["Cute","Active","Friendly"]},
+  "pit-bull": {title:"Pit Bull", price:2000, oldPrice:2500, img:"images/pexels-mao-li-168781267-11243683.jpg", desc:"Strong Pit Bull, loyal companion.", features:["Loyal","Strong","Protective"]},
+  "rat-terrier": {title:"Rat Terrier", price:2000, oldPrice:2500, img:"images/istockphoto-501597845-2048x2048.jpg", desc:"Small and active rat terrier.", features:["Active","Small","Friendly"]},
+  "hedgehog": {title:"Hedgehog", price:2000, oldPrice:2500, img:"images/rainer-bleek-cCDkGZOobRY-unsplash.jpg", desc:"Cute hedgehog, easy to care.", features:["Cute","Spiky","Small"]},
+  "pigeon": {title:"Pigeon", price:2000, oldPrice:2500, img:"images/pexels-mali-75973.jpg", desc:"Friendly pigeon, good for pets.", features:["Social","Colorful","Gentle"]},
+  "finches": {title:"Finches", price:2000, oldPrice:2500, img:"images/pexels-muhammad-nadeem-2148014195-32968455.jpg", desc:"Small finches, lively and colorful.", features:["Lively","Small","Colorful"]}
+};
+
+/* === HELPERS === */
+function normalizeLocalPath(p) {
+  if(!p) return p;
+  return p.replace(/\\/g,'/');
+}
+function formatINR(n) {
+  if(typeof n !== 'number') n = Number(n) || 0;
+  return '₹' + n.toLocaleString('en-IN');
+}
+
+/* === LOAD PRODUCT === */
+const params = new URLSearchParams(window.location.search);
+const productId = params.get('id');
+
+const productTitleEl = document.getElementById('productTitle');
+const productNameHeroEl = document.getElementById('productName');
+const productPriceEl = document.getElementById('productPrice');
+const productOldPriceEl = document.getElementById('productOldPrice');
+const productDescEl = document.getElementById('productDesc');
+const productImageEl = document.getElementById('productImage');
+const productFeaturesEl = document.getElementById('productFeatures');
+const qualityEl = document.getElementById('quality');
+const qtyEl = document.getElementById('quantity');
+const totalPriceEl = document.getElementById('totalPrice');
+const addToCartBtn = document.getElementById('addToCart');
+
+function updatePriceDisplay(basePrice, oldPrice) {
+  const quality = qualityEl.value;
+  let multiplier = 1;
+  if(quality === 'premium') multiplier = 1.2;
+  if(quality === 'deluxe') multiplier = 1.4;
+  const qty = Math.max(1, parseInt(qtyEl.value) || 1);
+  const unitPrice = Math.round(basePrice * multiplier);
+  const total = unitPrice * qty;
+  productPriceEl.textContent = formatINR(unitPrice);
+  if(oldPrice) {
+    productOldPriceEl.textContent = formatINR(Math.round(oldPrice));
+    productOldPriceEl.style.display = '';
+  } else {
+    productOldPriceEl.style.display = 'none';
+  }
+  totalPriceEl.textContent = formatINR(total);
+  return {unitPrice, total};
+}
+
+if(!productId || !products[productId]) {
+  document.querySelector('section.container').innerHTML = `
+    <div class="p-5 text-center">
+      <h3>❌ Product not found</h3>
+      <p>Please go back to the <a href="shop.html">Shop</a> and choose a product.</p>
+    </div>
+  `;
+} else {
+  const p = Object.assign({}, products[productId]);
+  productImageEl.src = normalizeLocalPath(p.img);
+  productTitleEl.innerText = p.title;
+  productNameHeroEl.innerText = p.title;
+  productDescEl.innerText = p.desc || '';
+  productFeaturesEl.innerHTML = '';
+  if(Array.isArray(p.features)) {
+    p.features.forEach(f => {
+      const li = document.createElement('li');
+      li.innerText = f;
+      productFeaturesEl.appendChild(li);
+    });
+  }
+  updatePriceDisplay(p.price, p.oldPrice);
+
+  qualityEl.addEventListener('change', () => updatePriceDisplay(p.price, p.oldPrice));
+  qtyEl.addEventListener('input', () => {
+    let v = parseInt(qtyEl.value) || 1;
+    if(v < 1) v = 1;
+    if(v > 99) v = 99;
+    qtyEl.value = v;
+    updatePriceDisplay(p.price, p.oldPrice);
+  });
+
+  addToCartBtn.addEventListener('click', () => {
+    const qty = Math.max(1, Math.min(99, parseInt(qtyEl.value) || 1));
+    const quality = qualityEl.value;
+    const priceObj = updatePriceDisplay(p.price, p.oldPrice);
+    const unitPrice = priceObj.unitPrice;
+    const total = priceObj.total;
+
+    const cartKey = 'pet_cart';
+    let cart = JSON.parse(localStorage.getItem(cartKey) || '[]');
+
+    const existingIndex = cart.findIndex(it => it.id === productId && it.quality === quality);
+    if(existingIndex > -1) {
+      cart[existingIndex].qty = Math.min(99, cart[existingIndex].qty + qty);
+      cart[existingIndex].unitPrice = unitPrice;
+      cart[existingIndex].total = cart[existingIndex].unitPrice * cart[existingIndex].qty;
+    } else {
+      cart.push({
+        id: productId,
+        title: p.title,
+        qty: qty,
+        quality: quality,
+        unitPrice: unitPrice,
+        total: total,
+        img: normalizeLocalPath(p.img)
+      });
+    }
+
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+    alert('Added to cart ✅');
+    window.location.href = 'cart.html';
+  });
+}
+</script>
+</body>
+</html>

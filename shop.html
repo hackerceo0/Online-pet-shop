@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Shop - Pet Paradise</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {font-family:Poppins,sans-serif;margin:0;padding:0;box-sizing:border-box;}
+    body {background:#f9f9f9;color:#333;}
+    .navbar-brand{font-weight:bold;font-size:1.8rem;color:#ff914d!important;}
+    .hero-small{background:#ff914d;color:white;padding:60px 0;text-align:center;}
+    .section-title{font-weight:bold;margin-bottom:1.5rem;}
+    .object-fit-cover{object-fit:cover;}
+    .card:hover{transform:scale(1.05);transition:.3s;box-shadow:0 5px 20px rgba(0,0,0,.2);}
+    footer{background:#212529;color:white;}
+    .social-icons a{color:white;margin:0 8px;font-size:1.2rem;}
+    .social-icons a:hover{color:#ff914d;}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🐾 PetParadise</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="adopt.html">Adopt</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero-small">
+  <div class="container">
+    <h1>Our Shop</h1>
+    <p>Find your perfect pet here</p>
+  </div>
+</section>
+
+<!-- Shop Items -->
+<section class="container py-5">
+  <h2 class="text-center section-title">Available Pets</h2>
+  <div class="row g-4">
+
+    <!-- Dogs -->
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/IMG-20250807-WA0034.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Golden Retriever">
+        <div class="card-body text-center">
+          <h5 class="card-title">Golden Retriever</h5>
+          <p class="card-text">₹15,000</p>
+          <a href="product.html?id=dog-gr" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/IMG-20250807-WA0029.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Labrador Retriever">
+        <div class="card-body text-center">
+          <h5 class="card-title">Labrador Retriever</h5>
+          <p class="card-text">₹10,000</p>
+          <a href="product.html?id=dog-lr" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-pixabay-236622.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="German Shepherd">
+        <div class="card-body text-center">
+          <h5 class="card-title">German Shepherd</h5>
+          <p class="card-text">₹15,000</p>
+          <a href="product.html?id=dog-gs" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/IMG-20250807-WA0033.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Pug">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pug</h5>
+          <p class="card-text">₹15,000</p>
+          <a href="product.html?id=dog-pug" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/IMG-20250807-WA0031.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Shih Tzu">
+        <div class="card-body text-center">
+          <h5 class="card-title">Shih Tzu</h5>
+          <p class="card-text">₹15,000</p>
+          <a href="product.html?id=dog-stz" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/stefan-ivanov-cheXIALO9j0-unsplash.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Persian Cat">
+        <div class="card-body text-center">
+          <h5 class="card-title">Persian Cat</h5>
+          <p class="card-text">₹8,000</p>
+          <a href="product.html?id=cat-pc1" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-nika-benedictova-24565203-9118280.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Bengal Cat">
+        <div class="card-body text-center">
+          <h5 class="card-title">Bengal Cat</h5>
+          <p class="card-text">₹8,000</p>
+          <a href="product.html?id=cat-pc2" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-pixabay-357141.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Siamese Cat">
+        <div class="card-body text-center">
+          <h5 class="card-title">Siamese Cat</h5>
+          <p class="card-text">₹8,000</p>
+          <a href="product.html?id=cat-pc3" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-shvetsa-4587970.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Sphynx Cat">
+        <div class="card-body text-center">
+          <h5 class="card-title">Sphynx Cat</h5>
+          <p class="card-text">₹8,000</p>
+          <a href="product.html?id=cat-pc4" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-helenalopes-1774927.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Green Parrot">
+        <div class="card-body text-center">
+          <h5 class="card-title">Green Parrot</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=bird-parrot" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/IMG-20250807-WA0014.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Budgerigar">
+        <div class="card-body text-center">
+          <h5 class="card-title">Budgerigar</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=bird-budgerigar" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/IMG-20250807-WA0015.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Canary">
+        <div class="card-body text-center">
+          <h5 class="card-title">Canary</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=bird-canary" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/IMG-20250807-WA0016.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Cockatiel">
+        <div class="card-body text-center">
+          <h5 class="card-title">Cockatiel</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=bird-cockatiel" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/IMG-20250807-WA0017.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Love Birds">
+        <div class="card-body text-center">
+          <h5 class="card-title">Love Birds</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=bird-love" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/helena-lopes-lIeqGEdvex0-unsplash.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Horse">
+        <div class="card-body text-center">
+          <h5 class="card-title">Horse</h5>
+          <p class="card-text">₹1,50,000</p>
+          <a href="product.html?id=horse" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/guy-bianco-iv-K8lVYS_u0UE-unsplash.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Duck">
+        <div class="card-body text-center">
+          <h5 class="card-title">Duck</h5>
+          <p class="card-text">₹15,000</p>
+          <a href="product.html?id=duck" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/jelle-taman-60WkGpWyadY-unsplash.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Lily">
+        <div class="card-body text-center">
+          <h5 class="card-title">Lily</h5>
+          <p class="card-text">₹15,000</p>
+          <a href="product.html?id=lily" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/zdenek-machacek-IgIdrCy0VxI-unsplash.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Turtle">
+        <div class="card-body text-center">
+          <h5 class="card-title">Turtle</h5>
+          <p class="card-text">₹15,000</p>
+          <a href="product.html?id=turtle" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/christopher-carson-i4XLJmlYit4-unsplash.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Pig">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pig</h5>
+          <p class="card-text">₹8,000</p>
+          <a href="product.html?id=pig" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/ashes-sitoula-KdZvvyemkPM-unsplash.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Cock">
+        <div class="card-body text-center">
+          <h5 class="card-title">Cock</h5>
+          <p class="card-text">₹8,000</p>
+          <a href="product.html?id=cock" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/360_F_755276205_T74uLkyAD3X0JklaXluVdlxAfkhPbVqS.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Dachshund">
+        <div class="card-body text-center">
+          <h5 class="card-title">Dachshund Dog</h5>
+          <p class="card-text">₹8,000</p>
+          <a href="product.html?id=dachshund" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-chevanon-1108099.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Lab Puppies">
+        <div class="card-body text-center">
+          <h5 class="card-title">Lab Puppies</h5>
+          <p class="card-text">₹8,000</p>
+          <a href="product.html?id=lab-puppies" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-mao-li-168781267-11243683.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Pit Bull">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pit Bull</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=pit-bull" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/istockphoto-501597845-2048x2048.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Rat Terrier">
+        <div class="card-body text-center">
+          <h5 class="card-title">Rat Terrier</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=rat-terrier" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/rainer-bleek-cCDkGZOobRY-unsplash.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Hedgehog">
+        <div class="card-body text-center">
+          <h5 class="card-title">Hedgehog</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=hedgehog" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-mali-75973.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Pigeon">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pigeon</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=pigeon" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100">
+        <img src="images/pexels-muhammad-nadeem-2148014195-32968455.jpg" class="card-img-top object-fit-cover" style="height:250px;" alt="Finches">
+        <div class="card-body text-center">
+          <h5 class="card-title">Finches</h5>
+          <p class="card-text">₹2,000</p>
+          <a href="product.html?id=finches" class="btn btn-warning">View</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 text-center">
+  <div class="container">
+    <p>© 2025 PetParadise. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

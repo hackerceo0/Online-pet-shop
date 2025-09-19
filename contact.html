@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Contact Us - Pet Paradise</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script&display=swap" rel="stylesheet"/>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+    body {background:#f9f9f9; color:#333;}
+    
+    /* Navbar */
+    .navbar-brand{font-weight:bold; font-size:1.8rem; color:#ff914d !important;}
+    .nav-link.active {color:#ff914d !important; font-weight:600;}
+    
+    /* Hero Section */
+    .hero-contact {
+      background: url('images/background.jpg') center/cover no-repeat;
+      height: 50vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      position:relative;
+      color:white;
+    }
+    .hero-contact::before {
+      content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+      background-color: rgba(0,0,0,0.45); 
+    }
+    .hero-contact .container { position: relative; z-index:2; }
+    .hero-contact h1 { font-size:3rem; font-weight:bold; }
+    .hero-contact p { font-size:1.2rem; }
+
+    /* Section Titles */
+    .section-title { font-weight:bold; margin-bottom:1.5rem; font-size:1.8rem; color:#ff914d;}
+
+    /* Contact Info Cards */
+    .contact-info .card { border:none; border-radius:15px; transition:0.3s; background:#fff; box-shadow:0 5px 20px rgba(0,0,0,0.1);}
+    .contact-info .card:hover { transform:translateY(-5px); box-shadow:0 10px 30px rgba(0,0,0,0.15);}
+    .contact-info i { font-size:2rem; color:#ff914d; margin-bottom:10px;}
+
+    /* Form */
+    .contact-form input, .contact-form textarea {
+      border-radius:10px; border:1px solid #ccc; padding:10px;
+      transition:0.3s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color:#ff914d; box-shadow:0 0 10px rgba(255,145,77,0.3); outline:none;
+    }
+    .contact-form button {
+      border-radius:50px; background:#ff914d; border:none; color:white; font-weight:bold;
+      padding:10px 30px; transition:0.3s;
+    }
+    .contact-form button:hover { background:#e6823d; }
+
+    /* Footer */
+    footer { background:#212529; color:white; }
+    .social-icons a { color:white; margin:0 8px; font-size:1.2rem; transition:0.3s; }
+    .social-icons a:hover { color:#ff914d; }
+    
+    /* Google Map */
+    .map-responsive { position: relative; overflow: hidden; padding-bottom: 56.25%; height: 0; max-width: 100%; }
+    .map-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🐾 PetParadise</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="adopt.html">Adopt</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-contact">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>Reach out to us for any inquiries or support!</p>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="container py-5">
+  <div class="row g-4">
+    <!-- Contact Info Cards -->
+    <div class="col-md-5 contact-info">
+      <h2 class="section-title">Contact Info</h2>
+      <div class="card p-3 mb-3 text-center">
+        <i class="fas fa-map-marker-alt"></i>
+        <h5 class="mt-2">Location</h5>
+        <p>123 Pet Street, Pune, India</p>
+      </div>
+      <div class="card p-3 mb-3 text-center">
+        <i class="fas fa-phone"></i>
+        <h5 class="mt-2">Call Us</h5>
+        <p>+91 98765 43210</p>
+      </div>
+      <div class="card p-3 mb-3 text-center">
+        <i class="fas fa-envelope"></i>
+        <h5 class="mt-2">Email</h5>
+        <p>support@petparadise.com</p>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="col-md-7">
+      <h2 class="section-title">Send Us a Message</h2>
+      <form class="contact-form">
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Your Name" required>
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" placeholder="Email Address" required>
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" rows="6" placeholder="Write your message..." required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Google Map -->
+<section class="container pb-5">
+  <h2 class="text-center section-title">Find Us Here</h2>
+  <div class="map-responsive">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.3382864908337!2d73.87718531536213!3d18.512704287347806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c036675a5c05%3A0xe61113e55ab3919f!2sPets%20Paradise!5e0!3m2!1sen!2sin!4v1694868185461!5m2!1sen!2sin" 
+      width="600" 
+      height="450" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 text-center">
+  <div class="container">
+    <p>© 2025 PetParadise. All rights reserved.</p>
+    <div class="social-icons mt-2">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Form Submission Script -->
+<script>
+document.querySelector('.contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Thank you! Your message has been sent.');
+  this.reset();
+});
+</script>
+
+</body>
+</html>
